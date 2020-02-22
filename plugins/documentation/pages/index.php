@@ -1,9 +1,9 @@
 <?php
+
 function docsGlobRecursive($pattern, $flags = 0)
 {
     $files = glob($pattern, $flags);
-    foreach (glob(dirname($pattern) . DIRECTORY_SEPARATOR . '*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir)
-    {
+    foreach (glob(dirname($pattern) . DIRECTORY_SEPARATOR . '*', GLOB_ONLYDIR | GLOB_NOSORT) as $dir) {
         $files = array_merge($files, docsGlobRecursive($dir . DIRECTORY_SEPARATOR . basename($pattern), $flags));
     }
     return $files;
@@ -48,7 +48,7 @@ if ($plugin->getProperty('documentationlang')) {
 }
 
 // Bei mehreren verfügbaren Sprachen Sprachwähler aufbauen
-$path = rex_path::plugin($addon, $docplugin , 'docs/');
+$path = rex_path::plugin($addon, $docplugin, 'docs/');
 $docs = [];
 foreach (glob($path . '*', GLOB_ONLYDIR) as $dir) {
     if (file_exists($path . basename($dir) . '/' . $default_navi)) {
@@ -81,16 +81,16 @@ if (count($docs) > 1) {
 }
 
 // Pfad zusammenbauen aus Addon + Plugin + Sprache
-$path = rex_path::plugin($addon, $docplugin , 'docs/' . $lang . '/');
+$path = rex_path::plugin($addon, $docplugin, 'docs/' . $lang . '/');
 
 // vorhandene Dateien ermitteln
-if ($ajax <> 'true') {
+if ('true' != $ajax) {
     $files = [];
     $filetypes = ['*.md', '*.gif', '*.png', '*.jpg', '*.jpeg'];
-    $search = [$path, "\\"];
+    $search = [$path, '\\'];
     $replace = ['', '/'];
     foreach ($filetypes as $mask) {
-	    foreach (docsGlobRecursive($path . $mask, GLOB_BRACE) as $filename) {
+        foreach (docsGlobRecursive($path . $mask, GLOB_BRACE) as $filename) {
             $filename = str_replace($search, $replace, $filename);
             $files[$filename] = $filename;
         }
@@ -102,7 +102,7 @@ if ($ajax <> 'true') {
 
 // Bild ausgeben wenn Parameter document_image gesetzt ist und die Datei existiert
 $docimage = rex_request('document_image', 'string', '');
-if ($docimage != '' && isset($files[$docimage])) {
+if ('' != $docimage && isset($files[$docimage])) {
     while (ob_get_length()) {
         ob_end_clean();
     }
@@ -111,11 +111,11 @@ if ($docimage != '' && isset($files[$docimage])) {
     $file_extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
     $ctype = '';
-    switch( $file_extension ) {
-        case "gif": $ctype="image/gif"; break;
-        case "png": $ctype="image/png"; break;
-        case "jpeg":
-        case "jpg": $ctype="image/jpeg"; break;
+    switch ($file_extension) {
+        case 'gif': $ctype = 'image/gif'; break;
+        case 'png': $ctype = 'image/png'; break;
+        case 'jpeg':
+        case 'jpg': $ctype = 'image/jpeg'; break;
         default:
     }
     if ($ctype) {
@@ -127,9 +127,9 @@ if ($docimage != '' && isset($files[$docimage])) {
 }
 
 // Navigation aus $default_navi
-if ($ajax <> 'true') {
+if ('true' != $ajax) {
     $navi = trim(rex_file::get($path . $default_navi));
-    if ($navi == '') {
+    if ('' == $navi) {
         $navi = rex_view::error(rex_i18n::rawMsg('documentation_navinotfound', $lang . '/' . $default_navi));
     }
 }
@@ -137,7 +137,7 @@ if ($ajax <> 'true') {
 // Content aus Parameter document_file, sonst aus $default_intro
 $file = rex_request('document_file', 'string', $default_intro);
 $content = trim(rex_file::get($path . basename($file)));
-if ($content == '') {
+if ('' == $content) {
     $content = rex_view::warning(rex_i18n::rawMsg('documentation_filenotfound', $lang . '/' . $file, $this->getProperty('supportpage')));
 }
 
@@ -156,7 +156,7 @@ if (class_exists('rex_markdown')) {
     $parser = rex_markdown::factory();
     $navi = $parser->parse($navi);
     $content = $parser->parse($content);
-} else if (class_exists('Parsedown')) {
+} elseif (class_exists('Parsedown')) {
     $parser = new Parsedown();
     $navi = $parser->text($navi);
     $content = $parser->text($content);
@@ -166,7 +166,7 @@ if (class_exists('rex_markdown')) {
 }
 
 // Links in Navigation ersetzen
-if ($ajax <> 'true') {
+if ('true' != $ajax) {
     foreach ($files as $i_file) {
         $file = rex_request('document_file', 'string', $default_intro);
         $current = ($i_file == $file) ? ' current' : '';
@@ -186,7 +186,7 @@ foreach ($files as $i_file) {
 }
 
 // Bei Parameter ajax=true nur den Inhalt ausgeben
-if ($ajax == 'true') {
+if ('true' == $ajax) {
     while (ob_get_length()) {
         ob_end_clean();
     }

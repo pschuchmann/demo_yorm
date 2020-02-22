@@ -18,12 +18,11 @@ if (rex::isBackend() && is_object(rex::getUser())) {
 
 // Assets im Backend einbinden
 if (rex::isBackend() && rex::getUser()) {
-
     // Die style.css überall im Backend einbinden
     rex_view::addCssFile($this->getAssetsUrl('css/style.css'));
 
     // Die script.js nur auf der Unterseite »config« des Addons einbinden
-    if (rex_be_controller::getCurrentPagePart(2) == 'main') {
+    if ('main' == rex_be_controller::getCurrentPagePart(2)) {
         rex_view::addJsFile($this->getAssetsUrl('js/script.js'));
     }
 }

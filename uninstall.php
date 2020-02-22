@@ -1,5 +1,5 @@
 <?php
 
-/** @var rex_addon $this */
+/* @var rex_addon $this */
 
 //remove table scheme from yform
