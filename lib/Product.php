@@ -2,6 +2,7 @@
 
 class Product extends \rex_yform_manager_dataset
 {
+
     public static function populateCategories(\rex_yform_manager_collection $products)
     {
         if ($products) {

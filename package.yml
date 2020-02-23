@@ -19,20 +19,33 @@ page:
             icon: rex-icon fa-info-circle
             perm: demo_yorm[Product]
             subPath: ../yform/plugins/manager/pages/data_edit.php
-            href: {page: demo_yorm/Product, table_name: rex_product}
+            href: 
+                page: demo_yorm/Product
+                table_name: rex_product
 
         ProductCategory:
             title: 'translate:page_product_category'
             icon: rex-icon fa-database
             perm: demo_yorm[ProductCategory]
             subPath: ../yform/plugins/manager/pages/data_edit.php
-            href: {page: demo_yorm/ProductCategory, table_name: rex_product_category}
+            href: 
+                page: demo_yorm/ProductCategory
+                table_name: rex_product_category
+
+        ProductRating:
+            title: 'translate:page_product_rating'
+            icon: rex-icon fa-star
+            perm: demo_yorm[ProductRating]
+            subPath: ../yform/plugins/manager/pages/data_edit.php
+            href: 
+                page: demo_yorm/ProductRating
+                table_name: rex_product_rating
             
 # Abhängigkeiten
 # Anforderungen ans System oder anderere AddOns, um dieses AddOn installieren oder update zu können
 requires:
     packages:
-        yform: '^3.0.0' # benötigt mindestens das Addon YForm 2.0.0
+        yform: '^3.3.1' # benötigt mindestens das Addon YForm 3.3.1
     
 # Plugins die automatisch installiert werden sollen
 system_plugins:
