@@ -8,4 +8,26 @@ demo_yorm_main = Hauptseite
 demo_yorm_main_title = Demo-Yorm Titel Hauptseite
 demo_yorm_main_content = Inhalt Demo-Yorm-Seite
 
+demo_yorm_page_product = Produkte
+demo_yorm_page_product_category = Kategorien
+demo_yorm_page_product_rating = Bewertungen
+
+product_name = Name
+product_category = Kategorie
+product_teaser = Kurzbeschreibung
+product_description = Beschreibung
+product_price = Preis
+product_media = Titelbild
+product_gallery = Galerie
+product_rating = Bewertung/-en
+
+product_category_name = Name
+product_category_description = Beschreibung
+product_category_media = Titelbild
+
+product_rating_buyer = Käufer
+product_rating_rating = Bewertung
+product_rating_rating_text = Beschreibung
+product_rating_product = Produkt
+
 perm_general_demo_yorm[] = demo_yorm[] - Rechte für Demo-Yorm

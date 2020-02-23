@@ -32,7 +32,7 @@ page:
 # Anforderungen ans System oder anderere AddOns, um dieses AddOn installieren oder update zu können
 requires:
     packages:
-        yform: '>=2.0.0' # benötigt mindestens das Addon YForm 2.0.0
+        yform: '^3.0.0' # benötigt mindestens das Addon YForm 2.0.0
     
 # Plugins die automatisch installiert werden sollen
 system_plugins:

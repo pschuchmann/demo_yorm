@@ -32,5 +32,48 @@ try {
     $message .= '<br>' . $e->getMessage();
 }
 
+// Insert demo data
+if (0 === Product::getAll()->count() && 0 === ProductCategory::getAll()->count() && 0 === ProductRating::getAll()->count()) {
+    for ($i = 12; $i <= 16; ++$i) {
+        $items = rex_sql::factory();
+        $items->setTable('rex_product_category');
+        $items->setValue('id', ($i - 11));
+        $items->setValue('name_1', 'Kategoriename '. ($i - 11));
+        $items->setValue('description_1', file_get_contents('https://loripsum.net/api/3/short'));
+        $items->setValue('media', $i. '.jpg');
+        $items->insertOrUpdate();
+    }
+
+    for ($i = 1; $i <= 12; ++$i) {
+        $array = preg_filter('/$/', '.jpg', range(1, 12));
+        shuffle($array);
+        $array = array_slice($array, random_int(2, 4), random_int(4, 8));
+        $array = implode(',', $array);
+
+        $items = rex_sql::factory();
+        $items->setTable('rex_product');
+        $items->setValue('id', $i);
+        $items->setValue('name_1', 'Produktname '.$i);
+        $items->setValue('teaser_1', file_get_contents('https://loripsum.net/api/2/short'));
+        $items->setValue('description_1', file_get_contents('https://loripsum.net/api/6/medium/headers'));
+        $items->setValue('media', $i. '.jpg');
+        $items->setValue('gallery', $array);
+        $items->setValue('price', random_int(50, 200));
+        $items->setValue('category', random_int(1, 4));
+        $items->insertOrUpdate();
+    }
+
+    for ($i = 1; $i <= 30; ++$i) {
+        $items = rex_sql::factory();
+        $items->setTable('rex_product_rating');
+        $items->setValue('id', $i);
+        $items->setValue('buyer', 'Produktname '.$i);
+        $items->setValue('rating', random_int(1, 5));
+        $items->setValue('rating_text', file_get_contents('https://loripsum.net/api/4/medium'));
+        $items->setValue('product_id', random_int(1, 12));
+        $items->insertOrUpdate();
+    }
+}
+
 // clear table cache
 rex_yform_manager_table::deleteCache();

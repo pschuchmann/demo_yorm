@@ -10,6 +10,9 @@ rex_yform_manager_dataset::setModelClass(rex::getTable('product_rating'), Produc
 // Addonrechte (permissions) registieren
 if (rex::isBackend() && is_object(rex::getUser())) {
     rex_perm::register('demo_yorm[]');
+    rex_perm::register('demo_yorm[Product]');
+    rex_perm::register('demo_yorm[ProductCategory]');
+    rex_perm::register('demo_yorm[ProductRating]');
     rex_perm::register('demo_yorm[config]');
 }
 
@@ -18,11 +21,8 @@ if (rex::isBackend() && is_object(rex::getUser())) {
 
 // Assets im Backend einbinden
 if (rex::isBackend() && rex::getUser()) {
-    // Die style.css überall im Backend einbinden
-    rex_view::addCssFile($this->getAssetsUrl('css/style.css'));
-
-    // Die script.js nur auf der Unterseite »config« des Addons einbinden
-    if ('main' == rex_be_controller::getCurrentPagePart(2)) {
-        rex_view::addJsFile($this->getAssetsUrl('js/script.js'));
+    // Die style.css nur auf Addon Seiten einbinden
+    if ('demo_yorm' === rex_be_controller::getCurrentPagePart(1)) {
+        rex_view::addCssFile($this->getAssetsUrl('css/style.css'));
     }
 }
