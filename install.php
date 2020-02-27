@@ -33,7 +33,7 @@ try {
 }
 
 // Insert demo data
-if (0 === Product::getAll()->count() && 0 === ProductCategory::getAll()->count() && 0 === ProductRating::getAll()->count()) {
+if (0 === rex_yform_manager_table::get(rex::getTable('product'))->query()->count() && 0 === rex_yform_manager_table::get(rex::getTable('product_category'))->query()->count() && 0 === ProductRating::getAll()->count()) {
     for ($i = 12; $i <= 16; ++$i) {
         $items = rex_sql::factory();
         $items->setTable('rex_product_category');
