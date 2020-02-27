@@ -10,7 +10,7 @@ page:
     title: 'translate:title' # Werte die mit `translate:` beginnen, werden anhand der Sprachdatei übersetzt. Der Addon-Präfix (hier `demo_yorm_`) kann weggelassen werden.
     icon: rex-icon fa-shopping-cart
     href: {page: demo_yorm/Product, table_name: rex_product}
-
+    
     # Unterseiten
     subpages:
 
@@ -19,6 +19,7 @@ page:
             icon: rex-icon fa-info-circle
             perm: demo_yorm[Product]
             subPath: ../yform/plugins/manager/pages/data_edit.php
+            hide_title: true
             href: {page: demo_yorm/Product, table_name: rex_product}
 
         ProductCategory:
@@ -26,6 +27,7 @@ page:
             icon: rex-icon fa-database
             perm: demo_yorm[ProductCategory]
             subPath: ../yform/plugins/manager/pages/data_edit.php
+            hide_title: true
             href: {page: demo_yorm/ProductCategory, table_name: rex_product_category}
             
 # Abhängigkeiten
