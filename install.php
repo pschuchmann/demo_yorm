@@ -63,13 +63,24 @@ if (0 === Product::getAll()->count() && 0 === ProductCategory::getAll()->count()
         $items->insertOrUpdate();
     }
 
+    $url = 'https://uinames.com/api/?amount=30&region=germany';
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, [
+        'Content-Type: application/json',
+    ]);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+    $result = curl_exec($curl);
+    $result = json_decode($result, TRUE);
+
     for ($i = 1; $i <= 30; ++$i) {
         $items = rex_sql::factory();
         $items->setTable('rex_product_rating');
         $items->setValue('id', $i);
-        $items->setValue('buyer', 'Produktname '.$i);
+        $items->setValue('buyer', $result[$i]['name'] . ' ' . $result[$i]['surname']);
         $items->setValue('rating', random_int(1, 5));
-        $items->setValue('rating_text', file_get_contents('https://loripsum.net/api/4/medium'));
+        $items->setValue('rating_text', file_get_contents('https://loripsum.net/api/4/short'));
         $items->setValue('product_id', random_int(1, 12));
         $items->insertOrUpdate();
     }
