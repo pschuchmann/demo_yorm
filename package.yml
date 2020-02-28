@@ -9,7 +9,9 @@ supportpage: https://github.com/FriendsOfREDAXO/demo_yorm
 page:
     title: 'translate:title' # Werte die mit `translate:` beginnen, werden anhand der Sprachdatei übersetzt. Der Addon-Präfix (hier `demo_yorm_`) kann weggelassen werden.
     icon: rex-icon fa-shopping-cart
-    href: {page: demo_yorm/Product, table_name: rex_product}
+    href: 
+        page: demo_yorm/Product
+        table_name: rex_product
     
     # Unterseiten
     subpages:
@@ -19,17 +21,28 @@ page:
             icon: rex-icon fa-info-circle
             perm: demo_yorm[Product]
             subPath: ../yform/plugins/manager/pages/data_edit.php
-            hide_title: true
-            href: {page: demo_yorm/Product, table_name: rex_product}
+            href: 
+                page: demo_yorm/Product
+                table_name: rex_product
 
         ProductCategory:
             title: 'translate:page_product_category'
             icon: rex-icon fa-database
             perm: demo_yorm[ProductCategory]
             subPath: ../yform/plugins/manager/pages/data_edit.php
-            hide_title: true
-            href: {page: demo_yorm/ProductCategory, table_name: rex_product_category}
-            
+            href: 
+                page: demo_yorm/ProductCategory
+                table_name: rex_product_category
+
+        ProductRating:
+            title: 'translate:page_product_rating'
+            icon: rex-icon fa-star
+            perm: demo_yorm[ProductRating]
+            subPath: ../yform/plugins/manager/pages/data_edit.php
+            href: 
+                page: demo_yorm/ProductRating
+                table_name: rex_product_rating
+        
 # Abhängigkeiten
 # Anforderungen ans System oder anderere AddOns, um dieses AddOn installieren oder update zu können
 requires:
