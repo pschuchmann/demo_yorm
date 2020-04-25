@@ -33,7 +33,7 @@ try {
 }
 
 // Insert demo data
-if (0 === rex_yform_manager_table::get(rex::getTable('product'))->query()->count() && 0 === rex_yform_manager_table::get(rex::getTable('product_category'))->query()->count() && 0 === ProductRating::getAll()->count()) {
+if (0 === rex_yform_manager_table::get(rex::getTable('product'))->query()->count() && 0 == rex_yform_manager_table::get(rex::getTable('product_category'))->query()->count() && 0 === ProductRating::getAll()->count()) {
     for ($i = 12; $i <= 16; ++$i) {
         $items = rex_sql::factory();
         $items->setTable('rex_product_category');
@@ -72,7 +72,7 @@ if (0 === rex_yform_manager_table::get(rex::getTable('product'))->query()->count
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
     $result = curl_exec($curl);
-    $result = json_decode($result, TRUE);
+    $result = json_decode($result, true);
 
     for ($i = 1; $i <= 30; ++$i) {
         $items = rex_sql::factory();
